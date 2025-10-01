@@ -12,6 +12,6 @@ struct SongModel: Identifiable {
     let name: String
     let data: Data
     let artist: String?
-    let coverLetter: Data?
+    let coverImage: Data?
     let duration: TimeInterval?
 }
