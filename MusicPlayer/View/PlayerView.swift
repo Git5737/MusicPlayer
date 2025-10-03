@@ -18,10 +18,12 @@ struct PlayerView: View {
                 BackgroundView()
                 
                 List(viewModel.songs){ song in
-                    SongCell(song: song)
-                    
-                    
-                }.listStyle(.plain)
+                    SongCell(song: song, durationFormatter: viewModel.durationFormatted)
+                        .onTapGesture {
+                            viewModel.playAudio(song: song)
+                        }
+                }
+                .listStyle(.plain)
             }
             
             // MARK: - Navigation Bar

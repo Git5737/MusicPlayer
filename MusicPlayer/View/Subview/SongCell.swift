@@ -10,12 +10,29 @@ import SwiftUI
 struct SongCell: View {
     
     let song: SongModel
+    let durationFormatter: (TimeInterval) -> String
     
     var body: some View {
         HStack {
-            Color.pink
-                .frame(width: 60, height: 60)
+            if let data = song.coverImage, let uiImage = UIImage(data: data) {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .frame(width: 60, height: 60)
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                
+            } else {
+                ZStack {
+                    Color.gray
+                        .frame(width: 60, height: 60)
+                    Image(systemName: "music.note")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(height: 30)
+                        .foregroundStyle(.white)
+                }
                 .cornerRadius(10)
+            }
+            
             VStack(alignment: .leading) {
                 Text(song.name)
                     .nameFont()
@@ -25,14 +42,19 @@ struct SongCell: View {
             
             Spacer()
             
-            Text("3:59")
-                .artistFont()
+            if let duration = song.duration {
+                Text("\(durationFormatter(duration))")
+                    .artistFont()
+            }
+            
+            
         }
+            .listRowBackground(Color.clear)
             .listRowBackground(Color.clear)
             .listRowSeparator(.hidden)
     }
 }
 
 #Preview {
-    SongCell(song: SongModel(name: "Test", data: Data(), artist: "Test", coverImage: Data(), duration: 1))
+    PlayerView()
 }
