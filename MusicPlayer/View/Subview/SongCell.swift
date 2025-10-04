@@ -8,28 +8,37 @@
 import SwiftUI
 
 struct SongCell: View {
+    
+    let song: SongModel
+    let durationFormatter: (TimeInterval) -> String
+    
     var body: some View {
         HStack {
-            Color.pink
-                .frame(width: 60, height: 60)
-                .cornerRadius(10)
+            
+            SongImageView(imageData: song.coverImage, size: 60)
+            
             VStack(alignment: .leading) {
-                Text("Смарагдове небо")
+                Text(song.name)
                     .nameFont()
-                Text("Drevo")
+                Text(song.artist ?? "Unknown Artist")
                     .artistFont()
             }
             
             Spacer()
             
-            Text("3:56")
-                .artistFont()
+            if let duration = song.duration {
+                Text("\(durationFormatter(duration))")
+                    .artistFont()
+            }
+            
+            
         }
+            .listRowBackground(Color.clear)
             .listRowBackground(Color.clear)
             .listRowSeparator(.hidden)
     }
 }
 
 #Preview {
-    SongCell()
+    PlayerView()
 }

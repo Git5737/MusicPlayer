@@ -6,13 +6,30 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		04B5F6682E910BA1006CFD25 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 04B5F6672E910BA1006CFD25 /* RealmSwift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		04A0CA252E8C63DB00F3D17F /* MusicPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		04B5F6652E910949006CFD25 /* Exceptions for "MusicPlayer" folder in "MusicPlayer" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 04A0CA242E8C63DB00F3D17F /* MusicPlayer */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		04A0CA272E8C63DB00F3D17F /* MusicPlayer */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				04B5F6652E910949006CFD25 /* Exceptions for "MusicPlayer" folder in "MusicPlayer" target */,
+			);
 			path = MusicPlayer;
 			sourceTree = "<group>";
 		};
@@ -23,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04B5F6682E910BA1006CFD25 /* RealmSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +83,7 @@
 			);
 			name = MusicPlayer;
 			packageProductDependencies = (
+				04B5F6672E910BA1006CFD25 /* RealmSwift */,
 			);
 			productName = MusicPlayer;
 			productReference = 04A0CA252E8C63DB00F3D17F /* MusicPlayer.app */;
@@ -94,6 +113,9 @@
 			);
 			mainGroup = 04A0CA1C2E8C63DB00F3D17F;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				04B5F6662E910BA1006CFD25 /* XCRemoteSwiftPackageReference "realm-swift" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 04A0CA262E8C63DB00F3D17F /* Products */;
 			projectDirPath = "";
@@ -253,6 +275,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MusicPlayer/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -284,6 +307,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MusicPlayer/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -328,6 +352,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		04B5F6662E910BA1006CFD25 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		04B5F6672E910BA1006CFD25 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 04B5F6662E910BA1006CFD25 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 04A0CA1D2E8C63DB00F3D17F /* Project object */;
 }
