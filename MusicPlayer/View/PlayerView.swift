@@ -21,15 +21,18 @@ struct PlayerView: View {
     var body: some View {
         NavigationStack {
             ZStack {
+                
                 BackgroundView()
+                
                 VStack {
-                    
                     // MARK: - List Of Song
                     List(viewModel.songs){ song in
-                        SongCell(song: song, durationFormatter: viewModel.durationFormatted)
-                            .onTapGesture {
-                                viewModel.playAudio(song: song)
-                            }
+                        ForEach(viewModel.songs) { song in
+                            SongCell(song: song, durationFormatter: viewModel.durationFormatted)
+                                .onTapGesture {
+                                    viewModel.playAudio(song: song)
+                                }
+                        }.onDelete(perform: viewModel.delete)
                     }
                     .listStyle(.plain)
                     
@@ -71,26 +74,13 @@ struct PlayerView: View {
         VStack {
             /// MARK: - MiniPlayer
             HStack {
-                if let data = viewModel.currentSong?.coverImage, let uiImage = UIImage(data: data) {
-                    Image(uiImage: uiImage)
-                        .resizable()
-                        .frame(width: frameImage, height: frameImage)
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
-                    
-                } else {
-                    ZStack {
-                        Color.gray
-                            .frame(width: frameImage, height: frameImage)
-                        Image(systemName: "music.note")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(height: 30)
-                            .foregroundStyle(.white)
-                    }
-                    .cornerRadius(10)
-                }
+                
+                /// Cover
+                SongImageView(imageData: viewModel.currentSong?.coverImage, size: frameImage)
                 
                 if !showFullPlayer {
+                    
+                    /// Description
                     VStack(alignment: .leading) {
                         SongDescription()
                     }
@@ -111,16 +101,16 @@ struct PlayerView: View {
             .padding()
             
             /// MARK: - FullPlayer
-            
             if showFullPlayer {
+                /// Description
                 VStack {
-                    VStack(alignment: .leading) {
-                        SongDescription()
-                    }
-                }.matchedGeometryEffect(id: "Song Title", in: playerAnimation)
-                    .padding(.top)
+                    SongDescription()
+                }
+                .matchedGeometryEffect(id: "Song Title", in: playerAnimation)
+                .padding(.top)
                 
                 VStack {
+                    /// Duration
                     HStack {
                         Text("\(viewModel.durationFormatted(viewModel.currentTime))")
                             .artistFont()
@@ -130,6 +120,8 @@ struct PlayerView: View {
                     }
                     .durationFont()
                     .padding()
+                    
+                    /// 
                        
                     Slider(value: $viewModel.currentTime, in: 0...viewModel.totalTime) { editing in
                         
@@ -148,7 +140,7 @@ struct PlayerView: View {
                     HStack(spacing: 40) {
                         
                         CustomButton(image: "backward.end.fill", size: .title) {
-                            // action
+                            viewModel.backward()
                         }
                         
                         CustomButton(image: viewModel.isPlaying ? "pause.circle.fill" : "play.circle.fill", size: .largeTitle) {
@@ -156,7 +148,7 @@ struct PlayerView: View {
                         }
                         
                         CustomButton(image: "forward.end.fill", size: .title) {
-                            // action
+                            viewModel.forward()
                         }
                     }
                 }
@@ -174,7 +166,6 @@ struct PlayerView: View {
                 .font(size)
         }
     }
-    
     
     @ViewBuilder
     private func SongDescription() -> some View {
