@@ -67,7 +67,7 @@ class ViewModel: NSObject, ObservableObject {
     
     func backward() {
         guard let currentIndex = currentIndex else { return }
-        let previousIndex = currentIndex > 0 ? currentIndex + 1 : songs.count - 1
+        let previousIndex = currentIndex > 0 ? currentIndex - 1 : songs.count - 1
         playAudio(song: songs[previousIndex])
     }
     

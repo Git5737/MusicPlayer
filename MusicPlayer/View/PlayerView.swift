@@ -98,8 +98,8 @@ struct PlayerView: View {
                 
             }
             .padding()
-            .background(showFullPlayer ? .clear : .black.opacity(0.3))
-            .cornerRadius(10)
+            .background(showFullPlayer ? .clear : .black.opacity(0.1))
+            .cornerRadius(25)
             .padding()
             
             /// MARK: - FullPlayer
