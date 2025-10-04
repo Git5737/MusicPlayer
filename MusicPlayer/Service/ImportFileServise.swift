@@ -8,10 +8,9 @@
 import Foundation
 import SwiftUI
 import AVFoundation
+import RealmSwift
 
 struct ImportFileServise: UIViewControllerRepresentable {
-    
-    @Binding var songs: [SongModel ]
     
     func makeCoordinator() -> Coordinator {
         Coordinator(parent: self)
@@ -29,7 +28,9 @@ struct ImportFileServise: UIViewControllerRepresentable {
     func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {}
     
     class Coordinator: NSObject, UIDocumentPickerDelegate{
+        
         var parent: ImportFileServise
+        @ObservedResults(SongModel.self) var songs
         
         init(parent: ImportFileServise) {
             self.parent = parent
@@ -66,10 +67,12 @@ struct ImportFileServise: UIViewControllerRepresentable {
                 
                 song.duration = CMTimeGetSeconds(asset.duration)
                 
-                if !self.parent.songs.contains(where: { $0.name == song.name }) {
-                    DispatchQueue.main.async {
-                        self.parent.songs.append(song)
-                    }
+                let isDublicate = songs.contains {
+                    $0.name == song.name && $0.artist == song.artist
+                }
+                
+                if !isDublicate {
+                    $songs.append(song)
                 } else {
                     print("Song  with same value name already exist")
                 }
